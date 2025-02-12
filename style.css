@@ -1,0 +1,225 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+:root {
+  --primary-color: springgreen;
+  --white-primary: #e9e9e9;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+
+  .am-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    padding-right: 4rem;
+    align-items: center;
+    color: var(--white-primary);
+
+    @media (width <= 1111px) {
+      padding-right: 1.5rem;
+    }
+
+    h2 {
+      font-weight: 800;
+
+      span {
+        color: var(--primary-color);
+      }
+    }
+
+    img {
+      height: 16px;
+      width: auto;
+      position: relative;
+      z-index: 8;
+    }
+  }
+
+  .am-main {
+    flex-grow: 1;
+    display: flex;
+    height: max-content;
+
+    @media (width <= 1111px) {
+      display: flex;
+      flex-direction: column;
+
+      section {
+        width: 100%;
+
+        &.main-left {
+          height: 70vh;
+        }
+
+        &.main-right {
+          height: 90vh;
+        }
+      }
+    }
+
+    section {
+      width: 50%;
+      min-height: 60vh;
+
+      &.main-left {
+        display: flex;
+        flex-wrap: wrap;
+        place-content: center;
+        flex-direction: column;
+        row-gap: 1.3rem;
+        color: var(--white-primary);
+        position: relative;
+        z-index: 5;
+
+        h1 {
+          font-weight: 900;
+        }
+
+        p {
+          font-size: 1.1rem;
+        }
+
+        * {
+          max-width: 70%;
+        }
+
+        .button {
+          outline: none;
+          padding: 0.8em 1.7em;
+          background-color: transparent;
+          border-radius: 0.3em;
+          position: relative;
+          max-width: 160px;
+          overflow: hidden;
+          cursor: pointer;
+          transition: 0.5s;
+          font-weight: 400;
+          font-size: 14px;
+          border: 1px solid;
+          font-family: inherit;
+          text-transform: uppercase;
+          color: var(--primary-color);
+          z-index: 1;
+        }
+
+        .button::before,
+        .button::after {
+          content: '';
+          display: block;
+          width: 50px;
+          height: 50px;
+          transform: translate(-50%, -50%);
+          position: absolute;
+          border-radius: 50%;
+          z-index: -1;
+          background-color: var(--primary-color);
+          transition: 1s ease;
+        }
+
+        .button::before {
+          top: -1em;
+          left: -1em;
+        }
+
+        .button::after {
+          left: calc(100% + 1em);
+          top: calc(100% + 1em);
+        }
+
+        .button:hover::before,
+        .button:hover::after {
+          height: 410px;
+          width: 410px;
+        }
+
+        .button:hover {
+          color: rgb(10, 25, 30);
+        }
+
+        .button:active {
+          filter: brightness(0.8);
+        }
+      }
+
+      &.main-right {
+        position: relative;
+
+        img {
+          max-width: 400px;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 4;
+
+          @media (width <= 1111px) and (orientation: landscape) {
+            max-width: 200px;
+          }
+        }
+      }
+
+      @media (width <= 1111px) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  aspect-ratio: 16 / 9;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.slash-green {
+  height: 100vh;
+  width: 50vw;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 50%;
+  opacity: 0.8;
+  background-color: var(--primary-color);
+  clip-path: polygon(50% 0%, 100% 0%, 50% 100%, 0% 100%);
+
+  @media (width <= 1111px) {
+    left: 10%;
+    height: 160vh;
+    width: 100vw;
+    opacity: 0.2;
+  }
+
+  @media (width <= 1111px) and (orientation: landscape) {
+    display: none;
+  }
+}
